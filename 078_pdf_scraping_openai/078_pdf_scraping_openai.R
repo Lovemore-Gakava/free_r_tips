@@ -13,7 +13,8 @@ library(tidyverse)
 library(pdftools)
 library(httr)
 
-file_path <- "078_pdf_scraping/pdf/meta_10k_filing_feb_2024.pdf"
+# file_path <- "078_pdf_scraping/pdf/meta_10k_filing_feb_2024.pdf"
+file_path <- "078_pdf_scraping_openai/pdf/meta_10k_filing_feb_2024.pdf"
 
 # 1.0 EXTRACT TEXT FROM EVERY PAGE ----
 
@@ -21,9 +22,9 @@ file_path <- "078_pdf_scraping/pdf/meta_10k_filing_feb_2024.pdf"
 text <- pdf_text(file_path)
 
 # Store text
-text %>% write_rds("078_pdf_scraping/text/text.rds")
+text %>% write_rds("078_pdf_scraping_openai/text/text.rds")
 
-text <- read_rds("078_pdf_scraping/text/text.rds")
+text <- read_rds("078_pdf_scraping_openai/text/text.rds")
 
 # Inspect the document
 length(text) # 147 pages of text
@@ -35,7 +36,7 @@ text[2] # PAGE 2 TEXT
 # 2.0 SUMMARIZE PDF DOCUMENT WITH OPENAI ----
 
 # My API key is stored as an environment variable (see usethis::edit_r_environ())
-api_key <- Sys.getenv("OPENAI_API_KEY")
+api_key <- Sys.getenv("OPEN_API_KEY")
 
 # General API completion endpoint
 endpoint <- "https://api.openai.com/v1/chat/completions"
